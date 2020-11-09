@@ -1,0 +1,80 @@
+name:        json-tools
+version:     0.0.1
+github:      mbj/json-tools
+category:    json
+synopsis:    Functions for dealing with JSON backed by aeson
+maintainer:  Markus Schirp <mbj@schirp-dso.com>
+license:     BSD3
+description: |
+  Functions extracted from observing aeson usage across a larger project space
+
+dependencies:
+- aeson              ^>= 1.4
+- base               >= 4.12 && ^>= 4.13
+- containers         ^>= 0.6.2
+- conversions        ^>= 0.0.3
+- deriving-aeson     ^>= 0.2
+- mprelude           ^>= 0.2
+- scientific         ^>= 0.3.6
+- source-constraints ^>= 0.0.1
+- text               ^>= 1.2
+
+flags:
+  development:
+    description: Run GHC with development flags
+    default: false
+    manual: true
+
+extra-doc-files:
+- README.md
+
+library:
+  source-dirs: src
+  exposed-modules:
+  - Data.JSON.Utils
+
+default-extensions:
+- AllowAmbiguousTypes
+- DataKinds
+- FlexibleContexts
+- KindSignatures
+- MultiWayIf
+- NoImplicitPrelude
+- OverloadedStrings
+- ScopedTypeVariables
+- TypeApplications
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wimplicit-prelude
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-exported-signatures
+- -Wmissing-local-signatures
+- -Wmissing-signatures
+- -Wmonomorphism-restriction
+- -Wredundant-constraints
+- -fplugin=SourceConstraints
+- -funbox-strict-fields
+
+when:
+  - condition: flag(development)
+    then:
+      ghc-options: -Werror
+    else:
+      ghc-options: -Wwarn
+
+tests:
+  test:
+    main:         Test.hs
+    source-dirs:  test
+    ghc-options:  &ghc-options
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
+    dependencies:
+    - devtools   ^>= 0.0.3
+    - json-tools
+    - tasty      ^>= 1.3.1

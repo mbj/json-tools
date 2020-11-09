@@ -1,0 +1,83 @@
+cabal-version: 1.18
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 4ff8e0d12f584c617c957b79c2219793bf6d56b66879463d42764c4592be46b8
+
+name:           json-tools
+version:        0.0.1
+synopsis:       Functions for dealing with JSON backed by aeson
+description:    Functions extracted from observing aeson usage across a larger project space
+category:       json
+homepage:       https://github.com/mbj/json-tools#readme
+bug-reports:    https://github.com/mbj/json-tools/issues
+maintainer:     Markus Schirp <mbj@schirp-dso.com>
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-doc-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/mbj/json-tools
+
+flag development
+  description: Run GHC with development flags
+  manual: True
+  default: False
+
+library
+  exposed-modules:
+      Data.JSON.Utils
+  other-modules:
+      Paths_json_tools
+  hs-source-dirs:
+      src
+  default-extensions: AllowAmbiguousTypes DataKinds FlexibleContexts KindSignatures MultiWayIf NoImplicitPrelude OverloadedStrings ScopedTypeVariables TypeApplications
+  ghc-options: -Wall -Wcompat -Widentities -Wimplicit-prelude -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-exported-signatures -Wmissing-local-signatures -Wmissing-signatures -Wmonomorphism-restriction -Wredundant-constraints -fplugin=SourceConstraints -funbox-strict-fields
+  build-depends:
+      aeson >=1.4 && <1.5
+    , base >=4.12 && >=4.13 && <4.14
+    , containers >=0.6.2 && <0.7
+    , conversions >=0.0.3 && <0.1
+    , deriving-aeson >=0.2 && <0.3
+    , mprelude >=0.2 && <0.3
+    , scientific >=0.3.6 && <0.4
+    , source-constraints >=0.0.1 && <0.1
+    , text >=1.2 && <1.3
+  if flag(development)
+    ghc-options: -Werror
+  else
+    ghc-options: -Wwarn
+  default-language: Haskell2010
+
+test-suite test
+  type: exitcode-stdio-1.0
+  main-is: Test.hs
+  other-modules:
+      Paths_json_tools
+  hs-source-dirs:
+      test
+  default-extensions: AllowAmbiguousTypes DataKinds FlexibleContexts KindSignatures MultiWayIf NoImplicitPrelude OverloadedStrings ScopedTypeVariables TypeApplications
+  ghc-options: -Wall -Wcompat -Widentities -Wimplicit-prelude -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-exported-signatures -Wmissing-local-signatures -Wmissing-signatures -Wmonomorphism-restriction -Wredundant-constraints -fplugin=SourceConstraints -funbox-strict-fields -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      aeson >=1.4 && <1.5
+    , base >=4.12 && >=4.13 && <4.14
+    , containers >=0.6.2 && <0.7
+    , conversions >=0.0.3 && <0.1
+    , deriving-aeson >=0.2 && <0.3
+    , devtools >=0.0.3 && <0.1
+    , json-tools
+    , mprelude >=0.2 && <0.3
+    , scientific >=0.3.6 && <0.4
+    , source-constraints >=0.0.1 && <0.1
+    , tasty >=1.3.1 && <1.4
+    , text >=1.2 && <1.3
+  if flag(development)
+    ghc-options: -Werror
+  else
+    ghc-options: -Wwarn
+  default-language: Haskell2010
